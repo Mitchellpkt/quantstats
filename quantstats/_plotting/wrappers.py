@@ -78,6 +78,8 @@ def snapshot(
     overlay_transparency=0.5,
     overlay_font_size=10,
     overlay_placement="upper left",
+    x_margin=0.02,
+    y_margin=0.02,
     **kwargs,
 ):
 
@@ -261,14 +263,20 @@ def snapshot(
     if overlay_text:
         overlay_loc = {"upper left": (0, 1), "lower left": (0, 0)}.get(overlay_placement, (0, 1))
         vertical_alignment = "top" if "upper" in overlay_placement else "bottom"
+        horizontal_alignment = overlay_placement.split(" ")[1].lower()
+
+        # Apply the margins based on the placement
+        x_loc = overlay_loc[0] + x_margin if horizontal_alignment == "left" else overlay_loc[0] - x_margin
+        y_loc = overlay_loc[1] - y_margin if vertical_alignment == "top" else overlay_loc[1] + y_margin
+
         axes[0].text(
-            overlay_loc[0],
-            overlay_loc[1],
+            x_loc,
+            y_loc,
             overlay_text,
             transform=axes[0].transAxes,
             fontsize=overlay_font_size,
             verticalalignment=vertical_alignment,
-            horizontalalignment=overlay_placement.split(" ")[1].lower(),
+            horizontalalignment=horizontal_alignment,
             color=overlay_text_color,
             backgroundcolor=overlay_bg_color,
             alpha=overlay_transparency,
