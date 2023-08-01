@@ -72,6 +72,12 @@ def snapshot(
     savefig=None,
     show=True,
     log_scale=False,
+    overlay_text=None,
+    overlay_text_color="#333333",
+    overlay_bg_color="white",
+    overlay_transparency=0.5,
+    overlay_font_size=10,
+    overlay_placement="upper left",
     **kwargs,
 ):
 
@@ -251,6 +257,22 @@ def snapshot(
         fig.tight_layout(w_pad=0, h_pad=0)
     except Exception:
         pass
+
+    if overlay_text:
+        overlay_loc = {"upper left": (0, 1), "lower left": (0, 0)}.get(overlay_placement, (0, 1))
+        vertical_alignment = "top" if "upper" in overlay_placement else "bottom"
+        axes[0].text(
+            overlay_loc[0],
+            overlay_loc[1],
+            overlay_text,
+            transform=axes[0].transAxes,
+            fontsize=overlay_font_size,
+            verticalalignment=vertical_alignment,
+            horizontalalignment=overlay_placement.split(" ")[1].lower(),
+            color=overlay_text_color,
+            backgroundcolor=overlay_bg_color,
+            alpha=overlay_transparency,
+        )
 
     if savefig:
         if isinstance(savefig, dict):
