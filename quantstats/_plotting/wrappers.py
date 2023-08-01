@@ -37,7 +37,7 @@ from .. import (
 )
 
 from . import core as _core
-
+from matplotlib.patches import Rectangle
 
 _FLATUI_COLORS = ["#fedd78", "#348dc1", "#af4b64", "#4fa487", "#9b59b6", "#808080"]
 _GRAYSCALE_COLORS = (len(_FLATUI_COLORS) * ["black"]) + ["white"]
@@ -269,6 +269,15 @@ def snapshot(
         x_loc = overlay_loc[0] + x_margin if horizontal_alignment == "left" else overlay_loc[0] - x_margin
         y_loc = overlay_loc[1] - y_margin if vertical_alignment == "top" else overlay_loc[1] + y_margin
 
+        # Create a bounding box with the desired background color and transparency
+        bbox_props = dict(
+            boxstyle="square,pad=0.3",
+            edgecolor="none",
+            facecolor=overlay_bg_color,
+            alpha=overlay_transparency
+        )
+
+        # Create the text object with the bounding box
         axes[0].text(
             x_loc,
             y_loc,
@@ -278,8 +287,7 @@ def snapshot(
             verticalalignment=vertical_alignment,
             horizontalalignment=horizontal_alignment,
             color=overlay_text_color,
-            backgroundcolor=overlay_bg_color,
-            alpha=overlay_transparency,
+            bbox=bbox_props
         )
 
     if savefig:
