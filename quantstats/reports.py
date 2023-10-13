@@ -488,6 +488,8 @@ def html(
     with open(output, "w", encoding="utf-8") as f:
         f.write(tpl)
 
+    return tpl
+
 
 def full(
     returns,
