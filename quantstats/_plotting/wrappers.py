@@ -80,6 +80,7 @@ def snapshot(
     overlay_placement="upper left",
     x_margin=0.02,
     y_margin=0.02,
+    periods=252,
     **kwargs,
 ):
 
@@ -145,7 +146,7 @@ def snapshot(
                 % (
                     returns.index.date[:1][0].strftime("%e %b '%y"),
                     returns.index.date[-1:][0].strftime("%e %b '%y"),
-                    _stats.sharpe(returns),
+                    _stats.sharpe(returns, periods=periods),
                 ),
                 fontsize=12,
                 color="gray",

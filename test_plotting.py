@@ -52,4 +52,5 @@ if __name__ == "__main__":
     )
 
     test_text: str = "lorem ipsum epsilon\nfoobar\n>baz\n>bat=5"
-    returns.plot_snapshot(overlay_text=test_text, show=True, x_margin=0.45, y_margin=0.45)
+    returns.plot_snapshot(overlay_text=test_text, show=True, x_margin=0.45, y_margin=0.45, periods=252)
+    returns.plot_snapshot(overlay_text=test_text, show=True, x_margin=0.45, y_margin=0.45, periods=356)

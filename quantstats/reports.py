@@ -1246,6 +1246,7 @@ def plots(
             mode=("comp" if compounded else "sum"),
             benchmark_title=benchmark_colname,
             strategy_title=strategy_colname,
+            periods=periods_per_year
         )
 
         if isinstance(returns, _pd.Series):
