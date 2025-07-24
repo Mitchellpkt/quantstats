@@ -11,7 +11,7 @@ dist
 quantstats.egg-info
 QuantStats.egg-info
 Icon
-/tests
+/misc_tests
 .vscode
 Icon
 CLAUDE.md
@@ -19,3 +19,4 @@ CLAUDE.md
 quantstats/stats.py
 .DS_Store
 .claude/settings.local.json
+/misc_tests/input_files/diagnostic_dict.json
