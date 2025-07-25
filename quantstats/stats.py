@@ -1492,7 +1492,7 @@ def kurtosis(returns, prepare_returns=True):
     return returns.kurtosis()
 
 
-def calmar(returns, prepare_returns=True):
+def calmar(returns, periods=252, prepare_returns=True):
     """
     Calculate the Calmar ratio (CAGR / Maximum Drawdown).
 
@@ -1518,7 +1518,7 @@ def calmar(returns, prepare_returns=True):
         returns = _utils._prepare_returns(returns)
 
     # Calculate CAGR and maximum drawdown
-    cagr_ratio = cagr(returns)
+    cagr_ratio = cagr(returns, periods=periods)
     max_dd = max_drawdown(returns)
 
     # Return ratio of CAGR to absolute maximum drawdown
