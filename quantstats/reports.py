@@ -113,6 +113,7 @@ def html(
     benchmark=None,
     rf=0.0,
     grayscale=False,
+    fontname=None,
     title="Strategy Tearsheet",
     output=None,
     compounded=True,
@@ -142,6 +143,8 @@ def html(
         Risk-free rate for calculations (as decimal, e.g., 0.02 for 2%)
     grayscale : bool, default False
         Whether to generate charts in grayscale instead of color
+    fontname : str or None, default None
+        Font family name to use for all plots. If None, uses matplotlib default
     title : str, default "Strategy Tearsheet"
         Title to display at the top of the HTML report
     output : str or None, default None
@@ -379,6 +382,7 @@ def html(
         ylabel="",
         compound=compounded,
         prepare_returns=False,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{returns}}", _embed_figure(figfile, figfmt))
 
@@ -395,6 +399,7 @@ def html(
         ylabel="",
         compound=compounded,
         prepare_returns=False,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{log_returns}}", _embed_figure(figfile, figfmt))
 
@@ -413,6 +418,7 @@ def html(
             ylabel="",
             compound=compounded,
             prepare_returns=False,
+            fontname=fontname,
         )
         tpl = tpl.replace("{{vol_returns}}", _embed_figure(figfile, figfmt))
 
@@ -429,6 +435,7 @@ def html(
         ylabel="",
         compounded=compounded,
         prepare_returns=False,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{eoy_returns}}", _embed_figure(figfile, figfmt))
 
@@ -445,6 +452,7 @@ def html(
         ylabel="",
         compounded=compounded,
         prepare_returns=False,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{monthly_dist}}", _embed_figure(figfile, figfmt))
 
@@ -461,6 +469,7 @@ def html(
         ylabel="",
         prepare_returns=False,
         active=active,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{daily_returns}}", _embed_figure(figfile, figfmt))
 
@@ -479,6 +488,7 @@ def html(
             show=False,
             ylabel="",
             prepare_returns=False,
+            fontname=fontname,
         )
         tpl = tpl.replace("{{rolling_beta}}", _embed_figure(figfile, figfmt))
 
@@ -495,6 +505,7 @@ def html(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{rolling_vol}}", _embed_figure(figfile, figfmt))
 
@@ -510,6 +521,7 @@ def html(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{rolling_sharpe}}", _embed_figure(figfile, figfmt))
 
@@ -525,6 +537,7 @@ def html(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
     tpl = tpl.replace("{{rolling_sortino}}", _embed_figure(figfile, figfmt))
 
@@ -542,6 +555,7 @@ def html(
             ylabel="",
             compounded=compounded,
             prepare_returns=False,
+            fontname=fontname,
         )
         tpl = tpl.replace("{{dd_periods}}", _embed_figure(figfile, figfmt))
     elif isinstance(returns, _pd.DataFrame):
@@ -559,6 +573,7 @@ def html(
                 ylabel="",
                 compounded=compounded,
                 prepare_returns=False,
+                fontname=fontname,
             )
             embed.append(figfile)
         tpl = tpl.replace("{{dd_periods}}", _embed_figure(embed, figfmt))
@@ -573,6 +588,7 @@ def html(
         savefig={"fname": figfile, "format": figfmt},
         show=False,
         ylabel="",
+        fontname=fontname,
     )
     tpl = tpl.replace("{{dd_plot}}", _embed_figure(figfile, figfmt))
 
@@ -591,6 +607,7 @@ def html(
             ylabel="",
             compounded=compounded,
             active=active,
+            fontname=fontname,
         )
         tpl = tpl.replace("{{monthly_heatmap}}", _embed_figure(figfile, figfmt))
     elif isinstance(returns, _pd.DataFrame):
@@ -609,6 +626,7 @@ def html(
                 ylabel="",
                 compounded=compounded,
                 active=active,
+                fontname=fontname,
             )
             embed.append(figfile)
         tpl = tpl.replace("{{monthly_heatmap}}", _embed_figure(embed, figfmt))
@@ -628,6 +646,7 @@ def html(
             ylabel="",
             compounded=compounded,
             prepare_returns=False,
+            fontname=fontname,
         )
         tpl = tpl.replace("{{returns_dist}}", _embed_figure(figfile, figfmt))
     elif isinstance(returns, _pd.DataFrame):
@@ -645,6 +664,7 @@ def html(
                 ylabel="",
                 compounded=compounded,
                 prepare_returns=False,
+                fontname=fontname,
             )
             embed.append(figfile)
         tpl = tpl.replace("{{returns_dist}}", _embed_figure(embed, figfmt))
@@ -669,6 +689,7 @@ def full(
     benchmark=None,
     rf=0.0,
     grayscale=False,
+    fontname=None,
     figsize=(8, 5),
     display=True,
     compounded=True,
@@ -694,6 +715,8 @@ def full(
         Risk-free rate for calculations (as decimal)
     grayscale : bool, default False
         Whether to generate charts in grayscale
+    fontname : str or None, default None
+        Font family name to use for all plots. If None, uses matplotlib default
     figsize : tuple, default (8, 5)
         Figure size for plots as (width, height)
     display : bool, default True
@@ -864,6 +887,7 @@ def full(
         returns=returns,
         benchmark=benchmark,
         grayscale=grayscale,
+        fontname=fontname,
         figsize=figsize,
         mode="full",
         compounded=compounded,
@@ -880,6 +904,7 @@ def basic(
     benchmark=None,
     rf=0.0,
     grayscale=False,
+    fontname=None,
     figsize=(8, 5),
     display=True,
     compounded=True,
@@ -904,6 +929,8 @@ def basic(
         Risk-free rate for calculations (as decimal)
     grayscale : bool, default False
         Whether to generate charts in grayscale
+    fontname : str or None, default None
+        Font family name to use for all plots. If None, uses matplotlib default
     figsize : tuple, default (8, 5)
         Figure size for plots as (width, height)
     display : bool, default True
@@ -995,6 +1022,7 @@ def basic(
         returns=returns,
         benchmark=benchmark,
         grayscale=grayscale,
+        fontname=fontname,
         figsize=figsize,
         mode="basic",
         compounded=compounded,
@@ -1671,6 +1699,7 @@ def plots(
     returns,
     benchmark=None,
     grayscale=False,
+    fontname=None,
     figsize=(8, 5),
     mode="basic",
     compounded=True,
@@ -1694,6 +1723,8 @@ def plots(
         Benchmark returns for comparison
     grayscale : bool, default False
         Whether to generate charts in grayscale
+    fontname : str or None, default None
+        Font family name to use for all plots. If None, uses matplotlib default
     figsize : tuple, default (8, 5)
         Figure size for plots as (width, height)
     mode : str, default "basic"
@@ -1762,6 +1793,7 @@ def plots(
             benchmark_title=benchmark_colname,
             strategy_title=strategy_colname,
             periods=periods_per_year,
+            fontname=fontname,
         )
 
         # Monthly returns heatmap
@@ -1775,6 +1807,7 @@ def plots(
                 ylabel="",
                 compounded=compounded,
                 active=active,
+                fontname=fontname,
             )
         elif isinstance(returns, _pd.DataFrame):
             # Generate heatmap for each strategy column
@@ -1789,6 +1822,7 @@ def plots(
                     returns_label=col,
                     compounded=compounded,
                     active=active,
+                    fontname=fontname,
                 )
 
         return
@@ -1814,6 +1848,7 @@ def plots(
         ylabel="",
         prepare_returns=False,
         compound=compounded,
+        fontname=fontname,
     )
 
     # Log returns plot for better visualization
@@ -1826,6 +1861,7 @@ def plots(
         ylabel="",
         prepare_returns=False,
         compound=compounded,
+        fontname=fontname,
     )
 
     # Volatility-matched returns (if benchmark exists)
@@ -1840,6 +1876,7 @@ def plots(
             ylabel="",
             prepare_returns=False,
             compound=compounded,
+            fontname=fontname,
         )
 
     # Yearly returns comparison
@@ -1852,6 +1889,7 @@ def plots(
         ylabel="",
         prepare_returns=False,
         compounded=compounded,
+        fontname=fontname,
     )
 
     # Returns distribution histogram
@@ -1864,6 +1902,7 @@ def plots(
         ylabel="",
         prepare_returns=False,
         compounded=compounded,
+        fontname=fontname,
     )
 
     # Calculate figure size for smaller plots
@@ -1884,6 +1923,7 @@ def plots(
         ylabel="",
         prepare_returns=False,
         active=active,
+        fontname=fontname,
     )
 
     # Rolling beta analysis (if benchmark exists)
@@ -1898,6 +1938,7 @@ def plots(
             show=True,
             ylabel="",
             prepare_returns=False,
+            fontname=fontname,
         )
 
     # Rolling volatility analysis
@@ -1910,6 +1951,7 @@ def plots(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
 
     # Rolling Sharpe ratio analysis
@@ -1921,6 +1963,7 @@ def plots(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
 
     # Rolling Sortino ratio analysis
@@ -1932,6 +1975,7 @@ def plots(
         ylabel="",
         period=win_half_year,
         periods_per_year=win_year,
+        fontname=fontname,
     )
 
     # Drawdown periods analysis
@@ -1944,6 +1988,7 @@ def plots(
             ylabel="",
             prepare_returns=False,
             compounded=compounded,
+            fontname=fontname,
         )
     elif isinstance(returns, _pd.DataFrame):
         # Handle multiple strategy columns
@@ -1957,6 +2002,7 @@ def plots(
                 title=col,
                 prepare_returns=False,
                 compounded=compounded,
+                fontname=fontname,
             )
 
     # Underwater (drawdown) plot
@@ -1967,6 +2013,7 @@ def plots(
         show=True,
         ylabel="",
         compound=compounded,
+        fontname=fontname,
     )
 
     # Monthly returns heatmap
@@ -1981,6 +2028,7 @@ def plots(
             ylabel="",
             compounded=compounded,
             active=active,
+            fontname=fontname,
         )
     elif isinstance(returns, _pd.DataFrame):
         # Handle multiple strategy columns
@@ -1995,6 +2043,7 @@ def plots(
                 returns_label=col,
                 compounded=compounded,
                 active=active,
+                fontname=fontname,
             )
 
     # Returns distribution analysis
@@ -2008,6 +2057,7 @@ def plots(
             ylabel="",
             prepare_returns=False,
             compounded=compounded,
+            fontname=fontname,
         )
     elif isinstance(returns, _pd.DataFrame):
         # Handle multiple strategy columns
@@ -2021,6 +2071,7 @@ def plots(
                 ylabel="",
                 prepare_returns=False,
                 compounded=compounded,
+                fontname=fontname,
             )
 
 
